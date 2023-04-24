@@ -17,6 +17,8 @@ There are three major components in Room:
 * “Data access objects (DAOs)” that provide methods that our app can use to query, update, insert, and delete data in the database.
 	
 
+# Write asynchronous DAO queries
+
 To prevent queries from blocking the UI, Room does not allow database access on the main thread. This restriction means that you must make your DAO queries asynchronous.
 
 DAO queries fall into three categories:
