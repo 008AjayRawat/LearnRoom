@@ -14,11 +14,7 @@ import com.learn.learnroomdatabase.ui.theme.LearnRoomDatabaseTheme
 class MainActivity : ComponentActivity() {
 
     private val db by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            ContactDatabase::class.java,
-            "contacts_db"
-        ).build()
+        (application as LearnDatabaseApplication).appComponent.getContactDatabase()
     }
 
     private val viewModel by viewModels<ContactViewModel>(
