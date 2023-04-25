@@ -53,15 +53,21 @@ class ContactViewModel(
                 val firstName = state.value.firstName
                 val lastName = state.value.lastName
                 val phoneNumber = state.value.phoneNumber
+                val address = state.value.address
 
                 if (firstName.isBlank() || lastName.isBlank() || phoneNumber.isBlank()) {
+                    return
+                }
+
+                if (address.street.isBlank() || address.city.isBlank() || address.postCode.isBlank() || address.state.isBlank()) {
                     return
                 }
 
                 val contact = Contact(
                     firstName = firstName,
                     lastName = lastName,
-                    phoneNumber = phoneNumber
+                    phoneNumber = phoneNumber,
+                    address = with(address) { Address(street = this.street, city = this.city, postCode = this.postCode, state = this.state) }
                 )
 
                 viewModelScope.launch {
@@ -94,6 +100,34 @@ class ContactViewModel(
                 _state.update {
                     it.copy(
                         phoneNumber = event.phoneNumber
+                    )
+                }
+            }
+            is ContactEvent.SetStreet -> {
+                _state.update {
+                    it.copy(
+                        address = it.address.copy(street = event.street)
+                    )
+                }
+            }
+            is ContactEvent.SetCity -> {
+                _state.update {
+                    it.copy(
+                        address = it.address.copy(city = event.city)
+                    )
+                }
+            }
+            is ContactEvent.SetPostCode -> {
+                _state.update {
+                    it.copy(
+                        address = it.address.copy(postCode = event.postCode)
+                    )
+                }
+            }
+            is ContactEvent.SetState -> {
+                _state.update {
+                    it.copy(
+                        address = it.address.copy(state = event.state)
                     )
                 }
             }

@@ -5,7 +5,16 @@ data class ContactState(
     val firstName: String = "",
     val lastName: String = "",
     val phoneNumber: String = "",
+    val address: AddressState = AddressState("", "", "", ""),
     val isAddingContact: Boolean = false,
     val sortType: SortType = SortType.FIRST_NAME
 
+)
+
+
+data class AddressState(
+    val street: String = "",
+    val state: String = "",
+    val city: String = "",
+    val postCode: String = ""
 )

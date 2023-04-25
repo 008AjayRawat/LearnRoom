@@ -48,6 +48,40 @@ fun AddContactDialog(
                         Text(text = "Phone Number")
                     }
                 )
+
+                TextField(
+                    value = state.address.street,
+                    onValueChange = { onEvent(ContactEvent.SetStreet(it)) },
+                    placeholder = {
+                        Text(text = "Street")
+                    }
+                )
+
+
+                TextField(
+                    value = state.address.city,
+                    onValueChange = { onEvent(ContactEvent.SetCity(it)) },
+                    placeholder = {
+                        Text(text = "City")
+                    }
+                )
+
+                TextField(
+                    value = state.address.postCode,
+                    onValueChange = { onEvent(ContactEvent.SetPostCode(it)) },
+                    placeholder = {
+                        Text(text = "Post Code")
+                    }
+                )
+
+                TextField(
+                    value = state.address.state,
+                    onValueChange = { onEvent(ContactEvent.SetState(it)) },
+                    placeholder = {
+                        Text(text = "State")
+                    }
+                )
+
             }
         },
         confirmButton = {

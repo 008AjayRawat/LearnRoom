@@ -81,6 +81,13 @@ fun ContactScreen(
                             text = "+${contact.phoneNumber}",
                             fontSize = 12.sp
                         )
+
+                        Text(
+                            text = "+${contact.address.street},${contact.address.city}, " +
+                                    "${contact.address.state}, ${contact.address.postCode}",
+                            fontSize = 12.sp
+                        )
+
                     }
                     IconButton(onClick = { onEvent(ContactEvent.DeleteContacts(contact)) }) {
                         Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete Contact")
