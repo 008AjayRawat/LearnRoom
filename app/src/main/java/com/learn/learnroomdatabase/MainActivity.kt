@@ -8,14 +8,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
+import com.learn.learnroomdatabase.di.DaggerMainActivityComponent
 import com.learn.learnroomdatabase.ui.theme.LearnRoomDatabaseTheme
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
 
-    private val db by lazy {
-        (application as LearnDatabaseApplication).appComponent.getContactDatabase()
-    }
+    @Inject
+    lateinit var db: ContactDatabase
+
 
     private val viewModel by viewModels<ContactViewModel>(
         factoryProducer = {
@@ -30,6 +31,12 @@ class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerMainActivityComponent
+            .factory()
+            .create((application as LearnDatabaseApplication).appComponent)
+            .inject(this)
+
+
         super.onCreate(savedInstanceState)
         setContent {
             LearnRoomDatabaseTheme {
